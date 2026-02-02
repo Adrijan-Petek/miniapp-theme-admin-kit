@@ -35,7 +35,7 @@ export function Admin() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-[color:var(--bg)]" style={{ fontFamily: "var(--font)", color: "var(--text)" }}>
+      <div className="app-shell">
         <Header />
         <main className="mx-auto w-full max-w-xl px-4 py-8">
           <Card>
@@ -45,15 +45,26 @@ export function Admin() {
             <div className="mt-5 grid gap-3">
               <div>
                 <Label>Admin password</Label>
-                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyDown={(e) => e.key === "Enter" && login()} />
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && login()}
+                />
               </div>
 
-              {error && <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200">{error}</div>}
+              {error && (
+                <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-xs text-red-200">
+                  {error}
+                </div>
+              )}
 
-              <Button variant="primary" onClick={login}>Sign in</Button>
+              <Button variant="primary" onClick={login}>
+                Sign in
+              </Button>
 
               <div className="mt-3 text-xs text-[color:var(--muted)]">
-                ⚠️ Demo auth: password is client-side via Vite env. For production, move auth to a server.
+                Warning: demo auth uses client-side Vite env. For production, move auth to a server.
               </div>
             </div>
           </Card>
@@ -63,15 +74,17 @@ export function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-[color:var(--bg)]" style={{ fontFamily: "var(--font)", color: "var(--text)" }}>
+    <div className="app-shell">
       <Header right={theme.features.enableAdminQuickActions ? <Button onClick={logout}>Logout</Button> : null} />
-      <main className="mx-auto w-full max-w-5xl px-4 py-6">
-        <div className="mb-4 flex items-start justify-between gap-4">
+      <main className="mx-auto w-full max-w-6xl px-4 py-6">
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-4">
           <div>
             <div className="text-lg font-extrabold">Admin Settings</div>
-            <div className="mt-1 text-sm text-[color:var(--muted)]">Edit theme + feature flags. Click Save to apply.</div>
+            <div className="mt-1 text-sm text-[color:var(--muted)]">Edit theme and feature flags.</div>
           </div>
-          <a href="/" className="text-sm text-[color:var(--accent)] hover:underline">← Back to app</a>
+          <a href="/" className="text-sm text-[color:var(--accent)] hover:underline">
+            Back to app
+          </a>
         </div>
 
         <ThemeEditor />

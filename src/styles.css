@@ -2,6 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
+:root { color-scheme: light dark; }
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  position: relative;
+  isolation: isolate;
+}
+
+.app-shell::before,
+.app-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-shell::before {
+  background:
+    radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 60%),
+    radial-gradient(900px 500px at 90% -20%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 55%);
+  opacity: 0.6;
+}
+
+.app-shell::after {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 35%),
+    radial-gradient(600px 400px at 50% 120%, rgba(0, 0, 0, 0.12), transparent 60%);
+  mix-blend-mode: soft-light;
+  opacity: 0.4;
+}
+
+.app-shell > * {
+  position: relative;
+  z-index: 1;
+}

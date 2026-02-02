@@ -1,14 +1,23 @@
 # Mini App Theme + Admin Kit
 
-A clean **mini app starter** with:
-- Theme system (logo, title, colors, font, announcement bar)
-- Admin panel at `/admin` (password login)
-- Feature flags (toggle UI modules on/off)
-- Export / import theme JSON
+Professional mini app starter with a full theme system, admin panel, and modern UI modules.
+
+## Screenshots
+Light mode:
+![Light mode](./light.png)
+
+Dark mode:
+![Dark mode](./dark.png)
+
+## Features
+- Theme system with light, dark, and system modes
+- Admin panel at `/admin` with auto-apply theme edits
+- Feature flags for core and pro modules
+- Export/import theme JSON
 - Farcaster Mini App SDK wrapper (no hard dependency)
 - GitHub Actions CI (lint + build)
 
-> Frontend-first for fast remixes. For real admin security + global config, wire ThemeConfig to a backend (KV/DB).
+> Frontend-first for fast remixes. For real admin security and global config, wire ThemeConfig to a backend (KV or DB).
 
 ---
 
@@ -41,8 +50,11 @@ Open:
 ## Theme system
 
 - Stored in `localStorage` (`miniapp_theme_v1`)
+- Light/dark palettes + accent color
 - Applied via CSS variables:
-  - `--accent`, `--bg`, `--panel`, `--text`, `--muted`, `--font`
+  - `--accent`, `--accent-foreground`
+  - `--bg`, `--panel`, `--panel-muted`
+  - `--text`, `--muted`, `--border`, `--ring`, `--shadow-color`
 
 Main files:
 - `src/theme/ThemeProvider.tsx`
@@ -51,9 +63,18 @@ Main files:
 
 ---
 
+## Pro modules
+
+Toggle them in Admin:
+- Insights (stats grid)
+- Automation (playbooks)
+- Status board (health and latency)
+
+---
+
 ## Farcaster integration
 
-This kit doesn’t force-install any SDK.
+This kit does not force-install any SDK.
 
 If Farcaster injects `window.sdk`:
 - `src/sdk/farcaster.ts` will call `sdk.actions.ready()`
