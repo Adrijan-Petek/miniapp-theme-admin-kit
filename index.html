@@ -12,6 +12,22 @@
     />
   </head>
   <body>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var path = params.get("path");
+        if (path) {
+          params.delete("path");
+          var cleanSearch = params.toString();
+          var newUrl =
+            window.location.origin +
+            "/miniapp-theme-admin-kit/" +
+            path +
+            (cleanSearch ? "?" + cleanSearch : "");
+          window.history.replaceState(null, "", newUrl);
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
